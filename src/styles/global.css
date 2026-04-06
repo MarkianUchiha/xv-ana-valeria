@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/* === Tema personalizado con Tailwind CSS 4 === */
+@theme {
+	/* Colores del proyecto */
+	--color-primary-50: #f0f8ff;
+	--color-primary-100: #e0f0fe;
+	--color-primary-200: #bae0fd;
+	--color-primary-300: #87ceeb;
+	--color-primary-400: #5bbcd6;
+	--color-primary-500: #38a3c3;
+	--color-primary-600: #2a83a4;
+	--color-primary-700: #246a85;
+	--color-primary-800: #23586e;
+	--color-primary-900: #214a5c;
+
+	--color-gold-50: #fdf8e8;
+	--color-gold-100: #f9eec5;
+	--color-gold-200: #f3dc8b;
+	--color-gold-300: #ecc94b;
+	--color-gold-400: #d4af37;
+	--color-gold-500: #c9a84c;
+	--color-gold-600: #b8860b;
+	--color-gold-700: #946b08;
+	--color-gold-800: #7a570d;
+	--color-gold-900: #674811;
+
+	/* Fuentes */
+	--font-serif: 'Playfair Display', Georgia, serif;
+	--font-sans: 'Inter', system-ui, sans-serif;
+	--font-display: 'Montserrat', 'Inter', sans-serif;
+}
+
+/* === Glassmorphismo - utilidad reutilizable === */
+.glass {
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 16px;
+	box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+}
+
+/* Variante para fondos claros (más opacidad) */
+.glass-light {
+	background: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	border-radius: 16px;
+	box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+}
+
+/* === Animaciones de scroll reveal === */
+.scroll-reveal {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-reveal.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* === Smooth scroll global === */
+html {
+	scroll-behavior: smooth;
+}
+
+/* === Ocultar scrollbar en el bottom nav === */
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+.scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
