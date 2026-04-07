@@ -1,23 +1,43 @@
 ---
 // Página principal - Single Page con todas las secciones
 import Layout from '../layouts/Layout.astro'
+import Hero from '../components/Hero.astro'
+import Invitation from '../components/Invitation.astro'
+import Gallery from '../components/Gallery.astro'
+import Family from '../components/Family.astro'
+import Timeline from '../components/Timeline.astro'
+import DressCode from '../components/DressCode.astro'
+import Gifts from '../components/Gifts.astro'
+import Location from '../components/Location.astro'
+import Footer from '../components/Footer.astro'
 ---
 
-<Layout title="XV Años Ana Valeria">
+<Layout title="XV Años Ana Valeria | 16 de Mayo 2026">
 	<main>
-		<!-- Las secciones se irán agregando aquí -->
-		<section class="min-h-screen flex items-center justify-center bg-primary-50">
-			<div class="text-center">
-				<h1 class="font-serif text-5xl md:text-7xl text-primary-800">
-					Ana Valeria
-				</h1>
-				<p class="font-display text-sm tracking-[0.3em] text-gold-500 mt-4 uppercase">
-					Mis Quince Años
-				</p>
-				<p class="text-primary-600 mt-6 font-sans">
-					16 de Mayo de 2026
-				</p>
-			</div>
+		<Hero />
+
+		<Invitation />
+
+		<Gallery />
+
+		<Family />
+
+		<Timeline />
+
+		<DressCode />
+
+		<Gifts />
+
+		<Location />
+
+		<section id="guestbook">
+			<!-- XV-013: Libro de Visitas -->
 		</section>
+
+		<section id="photos">
+			<!-- XV-014: Subir Fotos -->
+		</section>
+
+		<Footer />
 	</main>
 </Layout>
