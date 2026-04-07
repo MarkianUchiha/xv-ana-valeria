@@ -61,16 +61,31 @@
 	box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
 }
 
-/* === Animaciones de scroll reveal === */
-.scroll-reveal {
+/* === Scroll Reveal === */
+.reveal {
 	opacity: 0;
 	transform: translateY(30px);
 	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.scroll-reveal.is-visible {
+.reveal.revealed {
 	opacity: 1;
 	transform: translateY(0);
+}
+
+/* Stagger delays para cards */
+.reveal[data-delay="1"] { transition-delay: 0.1s; }
+.reveal[data-delay="2"] { transition-delay: 0.2s; }
+.reveal[data-delay="3"] { transition-delay: 0.3s; }
+.reveal[data-delay="4"] { transition-delay: 0.4s; }
+
+/* Respetar preferencia de reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+	.reveal {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
 }
 
 /* === Smooth scroll global === */

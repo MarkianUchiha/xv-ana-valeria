@@ -37,7 +37,7 @@ const events = [
 
 <section id="timeline" class="py-20 md:py-28 px-6" style="background-color: #F0F8FF;">
 	<div class="max-w-lg mx-auto">
-		<h2 class="font-serif text-3xl md:text-4xl text-primary-800 text-center mb-14">
+		<h2 class="font-serif text-3xl md:text-4xl text-primary-800 text-center mb-14 reveal">
 			Cronograma
 		</h2>
 
@@ -47,7 +47,7 @@ const events = [
 			<div class="absolute left-6 top-0 bottom-0 w-[2px] bg-primary-200/60"></div>
 
 			{events.map((event, i) => (
-				<div class={`relative flex items-start gap-5 ${i < events.length - 1 ? 'mb-12' : ''}`}>
+				<div class={`relative flex items-start gap-5 reveal ${i < events.length - 1 ? 'mb-12' : ''}`} data-delay={i + 1}>
 					<!-- Nodo: círculo con ícono -->
 					<div class="relative z-10 flex-shrink-0 w-12 h-12 rounded-full glass-strong flex items-center justify-center border border-gold-300/40">
 						<svg class="w-5 h-5 text-gold-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" set:html={event.icon} />

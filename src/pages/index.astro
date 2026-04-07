@@ -10,9 +10,18 @@ import DressCode from '../components/DressCode.astro'
 import Gifts from '../components/Gifts.astro'
 import Location from '../components/Location.astro'
 import Footer from '../components/Footer.astro'
+import SplashScreen from '../components/SplashScreen.tsx'
+import MusicPlayer from '../components/MusicPlayer.tsx'
+import GuestBook from '../components/GuestBook.tsx'
+import RandomWish from '../components/RandomWish.tsx'
+import PhotoUpload from '../components/PhotoUpload.tsx'
 ---
 
 <Layout title="XV Años Ana Valeria | 16 de Mayo 2026">
+	<!-- Splash de bienvenida + reproductor de música -->
+	<SplashScreen client:load />
+	<MusicPlayer client:load />
+
 	<main>
 		<Hero />
 
@@ -28,14 +37,34 @@ import Footer from '../components/Footer.astro'
 
 		<Gifts />
 
-		<Location />
-
-		<section id="guestbook">
-			<!-- XV-013: Libro de Visitas -->
+		<section id="guestbook" class="py-16 px-6 bg-white">
+			<div class="reveal">
+				<h2 class="font-serif text-3xl sm:text-4xl text-primary-800 italic text-center mb-2">
+					Libro de Visitas
+				</h2>
+				<p class="font-sans text-sm text-primary-600 text-center mb-10">
+					Déjale tus mejores deseos a Valeria
+				</p>
+			</div>
+			<GuestBook client:visible />
+			<RandomWish client:visible />
 		</section>
 
-		<section id="photos">
-			<!-- XV-014: Subir Fotos -->
+		<Location />
+
+		<section id="photos" class="py-16 px-6" style="background-color: #F0F8FF;">
+			<div class="reveal">
+				<p class="font-display text-xs tracking-[0.35em] text-gold-500 uppercase text-center mb-2">
+					Comparte tus momentos
+				</p>
+				<h2 class="font-serif text-3xl sm:text-4xl text-primary-800 italic text-center mb-3">
+					Sube tus Fotos
+				</h2>
+				<p class="font-sans text-sm text-primary-600 text-center mb-10">
+					Sube los momentos capturados durante la fiesta para que Ana Valeria pueda verlos
+				</p>
+			</div>
+			<PhotoUpload client:visible />
 		</section>
 
 		<Footer />

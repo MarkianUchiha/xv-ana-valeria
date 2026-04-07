@@ -1,5 +1,6 @@
 ---
-// Footer: agradecimiento, crédito y copyright
+// Footer: agradecimiento, crédito, copyright y control de música
+import MusicToggle from './MusicToggle.tsx'
 ---
 
 <footer id="footer" class="py-14 pb-24 px-6 text-center" style="background: linear-gradient(180deg, #1a2e3d 0%, #0f1c26 100%);">
@@ -21,4 +22,9 @@
 	<p class="font-sans text-xs text-white/30 mt-1">
 		© 2026
 	</p>
+
+	<!-- Control de música -->
+	<div class="mt-4">
+		<MusicToggle client:load />
+	</div>
 </footer>
