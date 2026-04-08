@@ -1,43 +1,109 @@
-# Astro Starter Kit: Minimal
+# XV Ana Valeria — Invitación Digital
 
-```sh
-npm create astro@latest -- --template minimal
+Invitación digital web para XV años. Single page, mobile-first, temática elegante con glassmorphismo y mariposas.
+
+## Stack
+
+- **Astro 6** + **React 19** + **Tailwind CSS 4**
+- **Supabase** (PostgreSQL + Storage)
+- **Netlify** (deploy)
+
+## Desarrollo
+
+```bash
+npm install
+npm run dev      # localhost:4321
+npm run build    # build de producción en /dist
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Variables de entorno
 
-## 🚀 Project Structure
+Crear `.env` en la raíz:
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+PUBLIC_SUPABASE_URL=https://tu-proyecto.supabase.co
+PUBLIC_SUPABASE_ANON_KEY=tu_anon_key
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+En Netlify agregar las mismas variables en **Site configuration → Environment variables**.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Supabase — Setup
 
-Any static assets, like images, can be placed in the `public/` directory.
+Ejecutar en el SQL Editor:
 
-## 🧞 Commands
+```sql
+-- Tabla de mensajes
+CREATE TABLE messages (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
 
-All commands are run from the root of the project, from a terminal:
+ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Anyone can insert messages" ON messages FOR INSERT WITH CHECK (true);
+CREATE POLICY "Anyone can read messages" ON messages FOR SELECT USING (true);
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+-- Bucket de fotos
+INSERT INTO storage.buckets (id, name, public) VALUES ('event-photos', 'event-photos', true);
 
-## 👀 Want to learn more?
+CREATE POLICY "Anyone can upload photos" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'event-photos');
+CREATE POLICY "Anyone can view photos" ON storage.objects FOR SELECT USING (bucket_id = 'event-photos');
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Administración
+
+### Borrar mensajes
+Supabase Dashboard → **Table Editor → messages** → seleccionar filas → eliminar.
+
+### Borrar fotos
+Supabase Dashboard → **Storage → event-photos** → seleccionar archivos → eliminar.
+
+### Páginas privadas (solo para el cliente)
+- **Muro de mensajes:** `/mensajes?key=anavaleria2026`
+- **Galería de fotos:** `/fotos?key=anavaleria2026`
+
+## Estructura del proyecto
+
+```
+src/
+├── components/       # Componentes Astro y React Islands
+├── layouts/          # Layout principal con meta tags y scroll reveal
+├── lib/              # Cliente de Supabase
+├── pages/            # Páginas (index, mensajes, fotos)
+├── styles/           # CSS global (tema, glass, reveal)
+└── assets/           # Imágenes procesadas por Astro
+public/
+├── audio/            # Música de fondo
+├── gallery/          # Fotos accesibles directamente
+└── og-image.jpg      # Imagen para compartir en redes
+```
+
+## Reutilizar para otra invitación (Fork)
+
+Para crear otra invitación a partir de esta:
+
+1. **Fork** del repo en GitHub
+2. **Supabase**: crear un nuevo proyecto y ejecutar el SQL de arriba
+3. **`.env`**: actualizar con las nuevas keys de Supabase
+4. **Personalizar contenido:**
+   - `Hero.astro` — nombre, fecha
+   - `Countdown.tsx` — fecha del evento
+   - `Invitation.astro` — texto de invitación
+   - `Family.astro` — fotos, nombres, mensajes
+   - `Timeline.astro` — eventos y horarios
+   - `DressCode.astro` — código de vestimenta
+   - `Gifts.astro` — link mesa de regalos
+   - `Location.astro` — direcciones y mapas
+   - `SplashScreen.tsx` — foto de portada
+   - `index.astro` — sección de confirmación (número WhatsApp)
+5. **Fotos**: reemplazar en `src/assets/gallery/` y `src/assets/family/`
+6. **Música**: reemplazar en `public/audio/` y actualizar ruta en `MusicPlayer.tsx`
+7. **Colores**: editar `src/styles/global.css` (variables `@theme`)
+8. **SEO**: actualizar `Layout.astro` (títulos, descripción, og-image)
+9. **Key privada**: cambiar `anavaleria2026` en `MessageWall.tsx` y `PhotoGallery.tsx`
+10. **Deploy**: conectar a Netlify con las nuevas env vars
+
+---
+
+by [MarkiDev](https://markidev.com)
