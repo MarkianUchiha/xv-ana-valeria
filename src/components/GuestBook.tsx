@@ -33,8 +33,7 @@ export default function GuestBook() {
 		setIsLoading(false)
 
 		if (error) {
-			console.error('Supabase error:', error)
-			setFeedback({ type: 'error', text: `Error: ${error.message}` })
+			setFeedback({ type: 'error', text: 'Hubo un error, intenta de nuevo' })
 			return
 		}
 
